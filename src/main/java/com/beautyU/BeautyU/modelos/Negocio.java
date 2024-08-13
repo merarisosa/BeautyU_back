@@ -1,16 +1,13 @@
 package com.beautyU.BeautyU.modelos;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.beautyU.BeautyU.dto.DireccionGeneralDTO;
+import com.beautyU.BeautyU.dto.NegocioVistaCardDTO;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
-import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.json.simple.JSONObject;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Table
 @Entity
@@ -37,7 +34,26 @@ public class Negocio {
     private Double rating;
     private String website;
     private String map_location;
+    private String descripcion;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "calle", column = @Column(name = "direccion_calle")),
+            @AttributeOverride(name = "numero", column = @Column(name = "direccion_numero")),
+            @AttributeOverride(name = "colonia", column = @Column(name = "direccion_colonia")),
+            @AttributeOverride(name = "cp", column = @Column(name = "direccion_cp")),
+            @AttributeOverride(name = "municipio", column = @Column(name = "direccion_municipio")),
+            @AttributeOverride(name = "localidad", column = @Column(name = "direccion_localidad"))
+    })
     private Direccion direccion;
+
+    public Negocio (NegocioVistaCardDTO negocioVistaCardDTO){
+        this.nombre = negocioVistaCardDTO.nombre();
+        this.photo_header_url = negocioVistaCardDTO.photo_header_url();
+        this.rating = negocioVistaCardDTO.rating();
+        this.direccion = new Direccion(
+                new DireccionGeneralDTO(
+                        negocioVistaCardDTO.direccionGeneralDTO().localidad(),
+                        negocioVistaCardDTO.direccionGeneralDTO().municipio()));
+    }
 }
