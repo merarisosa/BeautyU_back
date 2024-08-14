@@ -36,15 +36,8 @@ public class Negocio {
     private String map_location;
     private String descripcion;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "calle", column = @Column(name = "direccion_calle")),
-            @AttributeOverride(name = "numero", column = @Column(name = "direccion_numero")),
-            @AttributeOverride(name = "colonia", column = @Column(name = "direccion_colonia")),
-            @AttributeOverride(name = "cp", column = @Column(name = "direccion_cp")),
-            @AttributeOverride(name = "municipio", column = @Column(name = "direccion_municipio")),
-            @AttributeOverride(name = "localidad", column = @Column(name = "direccion_localidad"))
-    })
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
     public Negocio (NegocioVistaCardDTO negocioVistaCardDTO){

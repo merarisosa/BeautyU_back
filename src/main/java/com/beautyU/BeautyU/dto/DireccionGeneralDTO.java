@@ -8,8 +8,12 @@ public record DireccionGeneralDTO(
         String municipio
 ) {
 
-    public DireccionGeneralDTO (Negocio negocio){
+    public DireccionGeneralDTO(String localidad, String municipio) {
+        this.localidad = localidad;
+        this.municipio = municipio;
+    }
+   /* public DireccionGeneralDTO (Negocio negocio){
         this(negocio.getDireccion().getLocalidad(),
                 negocio.getDireccion().getMunicipio());
-    }
+    }*/
 }
