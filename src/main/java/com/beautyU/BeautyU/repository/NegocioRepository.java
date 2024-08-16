@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface NegocioRepository extends JpaRepository<Negocio, Long>{
+    List<Negocio> findAllByDireccionId(Long direccionId);
 
 }

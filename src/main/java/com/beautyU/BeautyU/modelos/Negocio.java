@@ -2,6 +2,7 @@ package com.beautyU.BeautyU.modelos;
 
 import com.beautyU.BeautyU.dto.DireccionGeneralDTO;
 import com.beautyU.BeautyU.dto.NegocioVistaCardDTO;
+import com.beautyU.BeautyU.infra.JSONObjectConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Negocio {
     private String telefono;
     private String celular;
 
+    @Convert(converter = JSONObjectConverter.class)
     @Column(columnDefinition = "json")
     private JSONObject social_media;
 

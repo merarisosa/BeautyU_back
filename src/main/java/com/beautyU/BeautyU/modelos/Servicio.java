@@ -1,5 +1,6 @@
 package com.beautyU.BeautyU.modelos;
 
+import com.beautyU.BeautyU.dto.ServicioAllDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,4 +30,10 @@ public class Servicio {
 
     @Column(columnDefinition = "text")
     private String foto_servicio_url;
+
+    public Servicio(ServicioAllDTO servicioAllDTO){
+        this.nombre = servicioAllDTO.nombre();
+        this.descripcion = servicioAllDTO.descripcion();
+        this.foto_servicio_url = servicioAllDTO.foto_servicio_url();
+    }
 }
